@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Register } from "./components/Register";
 import { List } from "./components/List";
-import {usePersist} from "./Persist"
+import { usePersist } from "./Persist";
 import "./App.css";
 
 function App() {
@@ -9,8 +9,11 @@ function App() {
   const [age, setAge] = useState("");
   const [birthday, setBirthday] = useState("");
   const [cv, setCv] = useState("");
+  const [findText, setFindText] = useState("");
+  const [mode, setMode] = useState("default");
 
-  const [data, setData] = usePersist("data",[]);
+  const [data, setData] = usePersist("data", []);
+  const [findData, setFindData] = usePersist("findData", []);
 
   const onChangeName = (e) => {
     setName(e.target.value);
@@ -46,6 +49,15 @@ function App() {
     setData(newData);
   };
 
+  const doFind = () => {
+    const newData = data.filter((item, key) => {
+      return item.cv.includes(findText);
+    });
+    setFindData(newData);
+    setMode("find");
+    setFindText("");
+  };
+
   return (
     <div className="App">
       <h1>推しデータベース</h1>
@@ -60,7 +72,15 @@ function App() {
         onChangeCv={onChangeCv}
         doAction={doAction}
       />
-      <List data={data} onClickDelete={onClickDelete} />
+      <List
+        data={data}
+        findData={findData}
+        onClickDelete={onClickDelete}
+        doFind={doFind}
+        findText={findText}
+        setFindText={setFindText}
+        mode={mode}
+      />
     </div>
   );
 }
