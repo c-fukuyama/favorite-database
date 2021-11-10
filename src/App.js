@@ -12,6 +12,7 @@ function App() {
   const [findText, setFindText] = useState("");
   const [mode, setMode] = useState("default");
   const [sort, setSort] = useState([]);
+  const [order, setOrder] = useState(true);
 
   const [data, setData] = usePersist("data", []);
   const [findData, setFindData] = usePersist("findData", []);
@@ -64,22 +65,16 @@ function App() {
   };
 
   const sortAge = () => {
-    const sortAgeArray = Object.keys(data).map((key) => ({
-      key: key,
-      value: data[key],
-    }));
-    const newSortAgeArray = sortAgeArray.sort(
-      (a, b) => a.value.age - b.value.age
-    );
-    const newSortAgeObj = Object.assign(
-      [],
-      ...newSortAgeArray.map((item, index) => ({
-        [index]: item.value,
-      }))
-    );
-    setSort(newSortAgeObj);
+    if (order) {
+      const newSortAgeArray = data.sort((a, b) => a.age - b.age);
+      setSort(newSortAgeArray);
+      setOrder(false);
+    } else {
+      const newSortAgeArray = data.sort((a, b) => b.age - a.age);
+      setSort(newSortAgeArray);
+      setOrder(true);
+    }
     setMode("sortAge");
-    console.log(sort);
   };
 
   return (
