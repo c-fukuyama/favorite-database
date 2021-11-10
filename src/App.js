@@ -65,15 +65,11 @@ function App() {
   };
 
   const sortAge = () => {
-    if (order) {
-      const newSortAgeArray = data.sort((a, b) => a.age - b.age);
-      setSort(newSortAgeArray);
-      setOrder(false);
-    } else {
-      const newSortAgeArray = data.sort((a, b) => b.age - a.age);
-      setSort(newSortAgeArray);
-      setOrder(true);
-    }
+    const newSortAgeArray = data.sort((a, b) =>
+      order ? a.age - b.age : b.age - a.age
+    );
+    setSort(newSortAgeArray);
+    setOrder(!order);
     setMode("sortAge");
   };
 
