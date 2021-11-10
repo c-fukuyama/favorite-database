@@ -11,6 +11,7 @@ function App() {
   const [cv, setCv] = useState("");
   const [findText, setFindText] = useState("");
   const [mode, setMode] = useState("default");
+  const [sort, setSort] = useState([]);
 
   const [data, setData] = usePersist("data", []);
   const [findData, setFindData] = usePersist("findData", []);
@@ -51,11 +52,34 @@ function App() {
 
   const doFind = () => {
     const newData = data.filter((item, key) => {
-      return item.cv.includes(findText);
+      return (
+        item.name.includes(findText) ||
+        item.age.includes(findText) ||
+        item.cv.includes(findText)
+      );
     });
     setFindData(newData);
     setMode("find");
     setFindText("");
+  };
+
+  const sortAge = () => {
+    const sortAgeArray = Object.keys(data).map((key) => ({
+      key: key,
+      value: data[key],
+    }));
+    const newSortAgeArray = sortAgeArray.sort(
+      (a, b) => a.value.age - b.value.age
+    );
+    const newSortAgeObj = Object.assign(
+      [],
+      ...newSortAgeArray.map((item, index) => ({
+        [index]: item.value,
+      }))
+    );
+    setSort(newSortAgeObj);
+    setMode("sortAge");
+    console.log(sort);
   };
 
   return (
@@ -80,6 +104,8 @@ function App() {
         findText={findText}
         setFindText={setFindText}
         mode={mode}
+        sortAge={sortAge}
+        sort={sort}
       />
     </div>
   );

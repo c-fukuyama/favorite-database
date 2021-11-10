@@ -12,7 +12,7 @@ export const FindForm = (props) => {
           type="text"
           onChange={onChangeText}
           value={findText}
-          placeholder="CV検索"
+          placeholder="検索"
         ></input>
         <button onClick={doFind}>検索</button>
       </div>
