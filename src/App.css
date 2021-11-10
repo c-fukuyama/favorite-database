@@ -79,11 +79,12 @@ p.age {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .find-form input {
   border: 1px solid #ccc;
-  width: 70%;
+  width: 80%;
   margin: 0;
 }
 .find-form button {
@@ -94,4 +95,43 @@ p.age {
   background-color: #5992de;
   color: #fff;
   border-radius: 4px;
+}
+
+.sort-age-btn {
+  position: relative;
+  height: 32px;
+  border: none;
+  background-color: #5992de;
+  color: #fff;
+  border-radius: 4px;
+  margin-top: 16px;
+  padding: 0.4em 2em 0.4em 1.2em;
+}
+
+.sort-age-btn.asc::after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 8px;
+  height: 8px;
+  top: 14px;
+  right: 10px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: rotate(315deg);
+  transition: 0.3s ease;
+}
+
+.sort-age-btn.desc::after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 8px;
+  height: 8px;
+  top: 8px;
+  right: 10px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: rotate(135deg);
+  transition: 0.3s ease;
 }

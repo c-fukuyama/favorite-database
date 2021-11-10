@@ -1,9 +1,14 @@
 export const SortButton = (props) => {
-  const { sortAge } = props;
+  const { sortAge, order } = props;
 
   return (
     <>
-      <button onClick={sortAge}>Age</button>
+      <button
+        className={order ? "sort-age-btn asc" : "sort-age-btn desc"}
+        onClick={sortAge}
+      >
+        Age
+      </button>
     </>
   );
 };

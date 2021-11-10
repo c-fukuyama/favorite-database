@@ -12,6 +12,7 @@ export const List = (props) => {
     mode,
     sortAge,
     sort,
+    order,
   } = props;
 
   const PersonText = data.map((value, key) => (
@@ -77,7 +78,7 @@ export const List = (props) => {
         findText={findText}
         setFindText={setFindText}
       />
-      <SortButton sortAge={sortAge} data={data} />
+      <SortButton sortAge={sortAge} data={data} order={order} />
       {mode === "default" && <div className="flex">{PersonText}</div>}
       {mode === "find" && <div className="flex">{FindPersonText}</div>}
       {mode === "sortAge" && <div className="flex">{SortAgePersonText}</div>}

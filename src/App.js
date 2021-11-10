@@ -101,6 +101,7 @@ function App() {
         mode={mode}
         sortAge={sortAge}
         sort={sort}
+        order={order}
       />
     </div>
   );
