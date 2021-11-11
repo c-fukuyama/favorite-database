@@ -26,7 +26,7 @@ export const List = (props) => {
       <p className="name">{value.name}</p>
       <div className="flex flex-center">
         <p className="birthday">
-          birthday:{value.birthday[0][0] + "/" + value.birthday[0][1]}
+          birthday:{value.birthday.month + "/" + value.birthday.day}
         </p>
         <p className="age">age:{value.age}</p>
       </div>
@@ -46,7 +46,7 @@ export const List = (props) => {
       <p className="name">{value.name}</p>
       <div className="flex flex-center">
         <p className="birthday">
-          birthday:{value.birthday[0][0] + "/" + value.birthday[0][1]}
+          birthday:{value.birthday.month + "/" + value.birthday.day}
         </p>
         <p className="age">age:{value.age}</p>
       </div>
@@ -66,7 +66,7 @@ export const List = (props) => {
       <p className="name">{value.name}</p>
       <div className="flex flex-center">
         <p className="birthday">
-          birthday:{value.birthday[0][0] + "/" + value.birthday[0][1]}
+          birthday:{value.birthday.month + "/" + value.birthday.day}
         </p>
         <p className="age">age:{value.age}</p>
       </div>
@@ -86,7 +86,7 @@ export const List = (props) => {
       <p className="name">{value.name}</p>
       <div className="flex flex-center">
         <p className="birthday">
-          birthday:{value.birthday[0][0] + "/" + value.birthday[0][1]}
+          birthday:{value.birthday.month + "/" + value.birthday.day}
         </p>
         <p className="age">age:{value.age}</p>
       </div>

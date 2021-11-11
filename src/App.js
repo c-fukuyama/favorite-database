@@ -35,7 +35,10 @@ function App() {
     const newData = {
       name: name,
       age: age,
-      birthday: [birthday.split("/")],
+      birthday: {
+        month: birthday.split("/")[0],
+        day: birthday.split("/")[1],
+      },
       cv: cv,
     };
     data.push(newData);
@@ -77,10 +80,8 @@ function App() {
   const sortBirthday = () => {
     const newSortBirthdayArray = data.sort((a, b) =>
       birthdayOrder
-        ? a.birthday[0][0] - b.birthday[0][0] ||
-          a.birthday[0][1] - b.birthday[0][1]
-        : b.birthday[0][0] - a.birthday[0][0] ||
-          b.birthday[0][1] - a.birthday[0][1]
+        ? a.birthday.month - b.birthday.month || a.birthday.day - b.birthday.day
+        : b.birthday.month - a.birthday.month || b.birthday.day - a.birthday.day
     );
     setSort(newSortBirthdayArray);
     setBirthdayOrder(!birthdayOrder);
