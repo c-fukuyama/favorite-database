@@ -66,8 +66,13 @@ input {
   justify-content: center;
 }
 
+p.birthday {
+  font-size: 14px;
+}
+
 p.age {
   margin-left: 8px;
+  font-size: 14px;
 }
 
 .delbtn {
@@ -123,6 +128,45 @@ p.age {
 }
 
 .sort-age-btn.desc::after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 8px;
+  height: 8px;
+  top: 8px;
+  right: 10px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: rotate(135deg);
+  transition: 0.3s ease;
+}
+
+.sort-birthday-btn {
+  position: relative;
+  height: 32px;
+  border: none;
+  background-color: #5992de;
+  color: #fff;
+  border-radius: 4px;
+  margin: 16px 0 0 8px;
+  padding: 0.4em 2em 0.4em 1.2em;
+}
+
+.sort-birthday-btn.asc::after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 8px;
+  height: 8px;
+  top: 14px;
+  right: 10px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: rotate(315deg);
+  transition: 0.3s ease;
+}
+
+.sort-birthday-btn.desc::after {
   position: absolute;
   display: inline-block;
   content: "";

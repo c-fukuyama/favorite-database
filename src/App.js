@@ -12,7 +12,8 @@ function App() {
   const [findText, setFindText] = useState("");
   const [mode, setMode] = useState("default");
   const [sort, setSort] = useState([]);
-  const [order, setOrder] = useState(true);
+  const [ageOrder, setAgeOrder] = useState(true);
+  const [birthdayOrder, setBirthdayOrder] = useState(true);
 
   const [data, setData] = usePersist("data", []);
   const [findData, setFindData] = usePersist("findData", []);
@@ -34,7 +35,7 @@ function App() {
     const newData = {
       name: name,
       age: age,
-      birthday: birthday,
+      birthday: [birthday.split("/")],
       cv: cv,
     };
     data.push(newData);
@@ -66,11 +67,24 @@ function App() {
 
   const sortAge = () => {
     const newSortAgeArray = data.sort((a, b) =>
-      order ? a.age - b.age : b.age - a.age
+      ageOrder ? a.age - b.age : b.age - a.age
     );
     setSort(newSortAgeArray);
-    setOrder(!order);
+    setAgeOrder(!ageOrder);
     setMode("sortAge");
+  };
+
+  const sortBirthday = () => {
+    const newSortBirthdayArray = data.sort((a, b) =>
+      birthdayOrder
+        ? a.birthday[0][0] - b.birthday[0][0] ||
+          a.birthday[0][1] - b.birthday[0][1]
+        : b.birthday[0][0] - a.birthday[0][0] ||
+          b.birthday[0][1] - a.birthday[0][1]
+    );
+    setSort(newSortBirthdayArray);
+    setBirthdayOrder(!birthdayOrder);
+    setMode("sortBirthday");
   };
 
   return (
@@ -97,7 +111,9 @@ function App() {
         mode={mode}
         sortAge={sortAge}
         sort={sort}
-        order={order}
+        ageOrder={ageOrder}
+        sortBirthday={sortBirthday}
+        birthdayOrder={birthdayOrder}
       />
     </div>
   );
