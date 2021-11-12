@@ -38,7 +38,7 @@ export const Register = (props) => {
             type="text"
             onChange={onChangeBirthday}
             value={birthday}
-            placeholder="誕生日"
+            placeholder="誕生日(MM/DD)"
           ></input>
         </div>
         <div>
