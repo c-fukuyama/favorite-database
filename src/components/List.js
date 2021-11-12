@@ -17,85 +17,35 @@ export const List = (props) => {
     birthdayOrder,
   } = props;
 
-  const PersonText = data.map((value, key) => (
-    <div key={key} className="person-text">
-      <div>
-        <img src="https://placehold.jp/150x150.png" alt="" />
-      </div>
-      <p className="num">No,{key + 1}</p>
-      <p className="name">{value.name}</p>
-      <div className="flex flex-center">
-        <p className="birthday">
-          birthday:{value.birthday.month + "/" + value.birthday.day}
-        </p>
-        <p className="age">age:{value.age}</p>
-      </div>
-      <p className="cv">CV:{value.cv}</p>
-      <button className="delbtn" onClick={() => onClickDelete(key)}>
-        Delete
-      </button>
-    </div>
-  ));
+  let list;
+  if (mode === "find") {
+    list = findData;
+  } else if (mode === "sortAge" || mode === "sortBirthday") {
+    list = sort;
+  } else {
+    list = data;
+  }
 
-  const FindPersonText = findData.map((value, key) => (
-    <div key={key} className="person-text">
-      <div>
-        <img src="https://placehold.jp/150x150.png" alt="" />
+  const PersonList = () =>
+    list.map((value, key) => (
+      <div key={key} className="person-text">
+        <div>
+          <img src="https://placehold.jp/150x150.png" alt="" />
+        </div>
+        <p className="num">No,{key + 1}</p>
+        <p className="name">{value.name}</p>
+        <div className="flex flex-center">
+          <p className="birthday">
+            birthday:{value.birthday.month + "/" + value.birthday.day}
+          </p>
+          <p className="age">age:{value.age}</p>
+        </div>
+        <p className="cv">CV:{value.cv}</p>
+        <button className="delbtn" onClick={() => onClickDelete(key)}>
+          Delete
+        </button>
       </div>
-      <p className="num">No,{key + 1}</p>
-      <p className="name">{value.name}</p>
-      <div className="flex flex-center">
-        <p className="birthday">
-          birthday:{value.birthday.month + "/" + value.birthday.day}
-        </p>
-        <p className="age">age:{value.age}</p>
-      </div>
-      <p className="cv">CV:{value.cv}</p>
-      <button className="delbtn" onClick={() => onClickDelete(key)}>
-        Delete
-      </button>
-    </div>
-  ));
-
-  const SortAgePersonText = sort.map((value, key) => (
-    <div key={key} className="person-text">
-      <div>
-        <img src="https://placehold.jp/150x150.png" alt="" />
-      </div>
-      <p className="num">No,{key + 1}</p>
-      <p className="name">{value.name}</p>
-      <div className="flex flex-center">
-        <p className="birthday">
-          birthday:{value.birthday.month + "/" + value.birthday.day}
-        </p>
-        <p className="age">age:{value.age}</p>
-      </div>
-      <p className="cv">CV:{value.cv}</p>
-      <button className="delbtn" onClick={() => onClickDelete(key)}>
-        Delete
-      </button>
-    </div>
-  ));
-
-  const SortBirthdayPersonText = sort.map((value, key) => (
-    <div key={key} className="person-text">
-      <div>
-        <img src="https://placehold.jp/150x150.png" alt="" />
-      </div>
-      <p className="num">No,{key + 1}</p>
-      <p className="name">{value.name}</p>
-      <div className="flex flex-center">
-        <p className="birthday">
-          birthday:{value.birthday.month + "/" + value.birthday.day}
-        </p>
-        <p className="age">age:{value.age}</p>
-      </div>
-      <p className="cv">CV:{value.cv}</p>
-      <button className="delbtn" onClick={() => onClickDelete(key)}>
-        Delete
-      </button>
-    </div>
-  ));
+    ));
 
   return (
     <>
@@ -113,12 +63,9 @@ export const List = (props) => {
         sortBirthday={sortBirthday}
         birthdayOrder={birthdayOrder}
       />
-      {mode === "default" && <div className="flex">{PersonText}</div>}
-      {mode === "find" && <div className="flex">{FindPersonText}</div>}
-      {mode === "sortAge" && <div className="flex">{SortAgePersonText}</div>}
-      {mode === "sortBirthday" && (
-        <div className="flex">{SortBirthdayPersonText}</div>
-      )}
+      <div className="flex">
+        <PersonList />
+      </div>
     </>
   );
 };
