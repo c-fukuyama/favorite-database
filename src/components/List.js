@@ -25,13 +25,12 @@ export const List = (props) => {
   } else {
     list = data;
   }
+  const defaultImage = "https://placehold.jp/150x150.png";
 
   const PersonList = () =>
     list.map((value, key) => (
       <div key={key} className="person-text">
-        <div>
-          <img src="https://placehold.jp/150x150.png" alt="" />
-        </div>
+        <img src={!!value.image ? value.image.source : defaultImage} alt="" />
         <p className="num">No,{key + 1}</p>
         <p className="name">{value.name}</p>
         <div className="flex flex-center">

@@ -11,6 +11,10 @@ export const Register = (props) => {
     onChangeBirthday,
     onChangeCv,
     doAction,
+    files,
+    addImage,
+    previewFiles,
+    clearImage,
   } = props;
 
   return (
@@ -48,6 +52,17 @@ export const Register = (props) => {
             value={cv}
             placeholder="CV"
           ></input>
+        </div>
+        <div>
+          <div className="img-upload-button">
+            <button onClick={addImage}>image</button>
+            <button onClick={clearImage} className="clear-button">
+              clear
+            </button>
+          </div>
+          {previewFiles && (
+            <img src={files.source} alt="preview" className="preview" />
+          )}
         </div>
         <button className="register-button" onClick={doAction}>
           登録

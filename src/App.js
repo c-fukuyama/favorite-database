@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Register } from "./components/Register";
 import { List } from "./components/List";
 import { usePersist } from "./Persist";
+import { useFileUpload } from "use-file-upload";
+
 import "./App.css";
 
 function App() {
@@ -9,6 +11,7 @@ function App() {
   const [age, setAge] = useState("");
   const [birthday, setBirthday] = useState("");
   const [cv, setCv] = useState("");
+  const [previewFiles, setPreviewFiles] = useState(false);
   const [findText, setFindText] = useState("");
   const [mode, setMode] = useState("default");
   const [sort, setSort] = useState([]);
@@ -17,6 +20,7 @@ function App() {
 
   const [data, setData] = usePersist("data", []);
   const [findData, setFindData] = usePersist("findData", []);
+  const [files, setFiles] = useFileUpload();
 
   const onChangeName = (e) => {
     setName(e.target.value);
@@ -40,6 +44,7 @@ function App() {
         day: birthday.split("/")[1],
       },
       cv: cv,
+      image: previewFiles ? files : "",
     };
     data.push(newData);
     setData(data);
@@ -47,6 +52,7 @@ function App() {
     setAge("");
     setBirthday("");
     setCv("");
+    setPreviewFiles(false);
   };
 
   const onClickDelete = (key) => {
@@ -88,6 +94,16 @@ function App() {
     setMode("sortBirthday");
   };
 
+  const addImage = () => {
+    setFiles({ accept: "image/*" }, ({ name, size, source, file }) => {
+      console.log("Files Selected", { name, size, source, file });
+      setPreviewFiles(true);
+    });
+  };
+  const clearImage = () => {
+    setPreviewFiles(false);
+  };
+
   return (
     <div className="App">
       <h1>推しデータベース</h1>
@@ -101,6 +117,10 @@ function App() {
         onChangeBirthday={onChangeBirthday}
         onChangeCv={onChangeCv}
         doAction={doAction}
+        files={files}
+        addImage={addImage}
+        previewFiles={previewFiles}
+        clearImage={clearImage}
       />
       <List
         data={data}
